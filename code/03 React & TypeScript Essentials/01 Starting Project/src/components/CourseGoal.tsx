@@ -1,10 +1,12 @@
+type CourseGoalProps = {
+  title: string;
+  description: string;
+}
+
 const CourseGoal = ({
   title,
   description,
-}: {
-  title: string;
-  description: string;
-}) => {
+}: CourseGoalProps) => {
   return (
     <article>
       <div>
