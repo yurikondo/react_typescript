@@ -1,6 +1,7 @@
 import CourseGoal from "./components/CourseGoal";
 import GoalImage from "./assets/goals.jpg";
 import Header from "./components/Header";
+import { useState } from "react";
 
 type CourseGoal = {
   title: string;
@@ -11,7 +12,14 @@ type CourseGoal = {
 export default function App() {
   const [goals, setGoals] = useState<CourseGoal[]>([]);
   const handleAddGoal = () => {
-    setGoals();
+    setGoals((prevGoals) => {
+      const newGoal: CourseGoal = {
+        id: Math.random(),
+        title: "ReactとTS",
+        description: "勉強中",
+      };
+      return [...prevGoals, newGoal];
+    });
   };
 
   return (
@@ -20,9 +28,15 @@ export default function App() {
         <h1>コースのゴール</h1>
       </Header>
       <button onClick={handleAddGoal}>ゴールを追加</button>
-      <CourseGoal title="タイトル">
-        <p>説明書き</p>
-      </CourseGoal>
+      <ul>
+        {goals.map((goal) => (
+          <li key={goal.id}>
+            <CourseGoal title={goal.title}>
+              <p>{goal.description}</p>
+            </CourseGoal>
+          </li>
+        ))}
+      </ul>
     </main>
   );
 }
