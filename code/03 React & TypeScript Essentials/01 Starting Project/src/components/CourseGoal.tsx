@@ -5,16 +5,20 @@ import { type FC, type PropsWithChildren, type ReactNode } from "react";
 //   children: ReactNode;
 // };
 
-type CourseGoalProps = PropsWithChildren<{ title: string }>;
+type CourseGoalProps = PropsWithChildren<{
+  id: number;
+  title: string;
+  onDelete: (id: number) => void;
+}>;
 
-const CourseGoal: FC<CourseGoalProps> = ({ title, children }) => {
+const CourseGoal: FC<CourseGoalProps> = ({ title, id, children, onDelete }) => {
   return (
     <article>
       <div>
         <h2>{title}</h2>
         {children}
       </div>
-      <button>DELETE</button>
+      <button onClick={() => onDelete(id)}>DELETE</button>
     </article>
   );
 };
